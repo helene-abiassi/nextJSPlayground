@@ -15,7 +15,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${inter.className}`}>
-        <h1>Main page</h1>
+        <h1>HomePage</h1>
+        {/* <Image
+          src={
+            "https://m.media-amazon.com/images/M/MV5BZjRjOTFkOTktZWUzMi00YzMyLThkMmYtMjEwNmQyNzliYTNmXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_FMjpg_UX1000_.jpg"
+          }
+          alt="rickandmortyhomeimage"
+          width={100}
+          height={100}
+        /> */}
         <p>
           I'm learning about rendering styles in Next.js - this page was
           Statically Rendered by default. The Characters page is rendered
