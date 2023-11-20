@@ -22,19 +22,24 @@ export interface CharacterType {
 }
 
 type ComponentProps = {
-  results: CharacterType[];
+  results: CharacterType;
 };
 
-export const getStaticPaths: GetStaticPaths = () => {
-  const slugs = ["1", "2", "3", "4", "5"];
+export const getStaticPaths: GetStaticPaths = async () => {
+  // const slugs = ["1", "2", "3", "4", "5"];
 
-  const paths = slugs.map((slug) => {
+  const response = await fetch(`https://rickandmortyapi.com/api/character`);
+  const characters: CharacterType[] = await response.json();
+  console.log("characters :>> ", characters);
+
+  const paths = characters.results.map((character: CharacterType) => {
     return {
       params: {
-        characterId: slug,
+        characterId: character.id.toString(),
       },
     };
   });
+
   return {
     paths,
     fallback: false,
@@ -44,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps<ComponentProps> = async (
   context
 ) => {
-  console.log("context :>> ", context);
+  // console.log("context :>> ", context);
 
   const id = context.params?.characterId;
 
@@ -62,11 +67,12 @@ export const getStaticProps: GetStaticProps<ComponentProps> = async (
 
 function singleCharacter({ character }: ComponentProps) {
   const router = useRouter();
-  console.log("router :>> ", router);
+
   console.log("character :>> ", character);
 
   return (
     <div>
+      <button onClick={() => router.back()}>←</button>
       <h1>Charater #{router.query.characterId}</h1>
       <CharacterCard character={character} />
     </div>

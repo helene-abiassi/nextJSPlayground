@@ -3,6 +3,7 @@ import React from "react";
 import styles from "@/styles/Characters.module.css";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export interface CharacterType {
   id: number;
@@ -51,7 +52,6 @@ function characters({ characters }: ComponentProps) {
         />
       </Head>
       <h1 className={styles.myH1}>Characters</h1>
-
       <div className="grid grid-cols-4 gap-4">
         {characters.results.map(
           (character: CharacterType, charIndex: number) => {
@@ -63,7 +63,8 @@ function characters({ characters }: ComponentProps) {
                   width={100}
                   height={100}
                 />
-                {character.name}
+                <p>{character.name}</p>
+                <Link href={`/characters/${character.id}`}>View More</Link>
               </div>
             );
           }
