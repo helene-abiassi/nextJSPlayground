@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function NavBar() {
   const navigation = [
-    { name: "Home", href: "/", current: true },
+    { name: "Home", href: "/", current: false },
     { name: "Characters", href: "/characters", current: false },
     { name: "Episodes", href: "/episodes", current: false },
   ];

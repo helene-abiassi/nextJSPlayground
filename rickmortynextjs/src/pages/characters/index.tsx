@@ -24,7 +24,7 @@ export interface CharacterType {
 }
 
 type ComponentProps = {
-  characters: CharacterType[];
+  results: CharacterType[];
 };
 
 export const getServerSideProps: GetServerSideProps<
@@ -52,16 +52,22 @@ function characters({ characters }: ComponentProps) {
       </Head>
       <h1 className={styles.myH1}>Characters</h1>
 
-      <div>
-        {characters.results.map((character) => {
-          return (
-            <div key={character.id}>
-              <Image src={character.imae} alt={character.name} />
-
-              {character.name}
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-4 gap-4">
+        {characters.results.map(
+          (character: CharacterType, charIndex: number) => {
+            return (
+              <div key={character.id}>
+                <Image
+                  src={character.image}
+                  alt={character.name}
+                  width={100}
+                  height={100}
+                />
+                {character.name}
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );
