@@ -1,5 +1,6 @@
 import CharacterCard from "@/components/CharacterCard";
 import { GetStaticPaths, GetStaticProps } from "next";
+import styles from "@/styles/Characters.module.css";
 import { useRouter } from "next/router";
 
 export interface CharacterType {
@@ -26,8 +27,6 @@ type ComponentProps = {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const slugs = ["1", "2", "3", "4", "5"];
-
   const response = await fetch(`https://rickandmortyapi.com/api/character`);
   const characters: CharacterType[] = await response.json();
   console.log("characters :>> ", characters);
@@ -72,7 +71,9 @@ function singleCharacter({ character }: ComponentProps) {
 
   return (
     <div>
-      <button onClick={() => router.back()}>←</button>
+      <button className={styles.linkButton} onClick={() => router.back()}>
+        ←
+      </button>
       <h1>Charater #{router.query.characterId}</h1>
       <CharacterCard character={character} />
     </div>
